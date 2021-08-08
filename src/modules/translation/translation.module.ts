@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TranslationService } from './service/translation.service';
+import { TranslationService } from './services/translation.service';
 
 @Module({
   providers: [TranslationService],

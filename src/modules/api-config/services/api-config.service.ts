@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ApiConfig } from '../interface/api-config.interface';
+import { ApiConfig } from '../interfaces/api-config.interface';
 
 @Injectable()
 export class ApiConfigService {
