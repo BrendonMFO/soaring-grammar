@@ -5,5 +5,5 @@ export const MULTER = Symbol('__multer_provider__');
 
 export const grammarMulterProvider: ValueProvider = {
   provide: MULTER,
-  useValue: multer({ dest: 'temp' }),
+  useValue: multer({ dest: '.' }),
 };

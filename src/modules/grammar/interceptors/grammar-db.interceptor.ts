@@ -21,6 +21,9 @@ export class GrammarDbInterceptor implements NestInterceptor {
 
   private async grammarDbFinalize(file?: Express.Multer.File): Promise<void> {
     if (!file) return;
-    Promise.all([unlink(file.path), getConnection(file.filename).close()]);
+    await Promise.all([
+      unlink(file.path),
+      getConnection(file.filename).close(),
+    ]);
   }
 }

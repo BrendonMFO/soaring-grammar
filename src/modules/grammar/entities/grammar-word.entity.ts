@@ -1,5 +1,5 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { GrammarLookupEntity } from './grammar-lookup.entity';
+import { Column, Entity, BaseEntity, PrimaryColumn, OneToMany } from 'typeorm';
 
 @Entity('WORDS')
 export class GrammarWordEntity extends BaseEntity {

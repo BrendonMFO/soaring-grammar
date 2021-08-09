@@ -3,6 +3,7 @@ import { REQUEST } from '@nestjs/core';
 import { createConnection } from 'typeorm';
 import { FactoryProvider, Scope } from '@nestjs/common';
 import { GrammarWordEntity } from '../entities/grammar-word.entity';
+import { GrammarBookEntity } from '../entities/grammar-book.entity';
 import { GrammarLookupEntity } from '../entities/grammar-lookup.entity';
 
 export const GRAMMAR_DB = Symbol('__grammar_db_provider__');
@@ -18,7 +19,7 @@ export const grammarDbProvider: FactoryProvider = {
       type: 'sqlite',
       name: file.filename,
       database: file.path,
-      entities: [GrammarWordEntity, GrammarLookupEntity],
+      entities: [GrammarWordEntity, GrammarLookupEntity, GrammarBookEntity],
     });
   },
 };

@@ -4,6 +4,7 @@ import { ApiConfigService } from './modules/api-config/services/api-config.servi
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule);
+  app.enableVersioning();
   const apiConfigService = app.get(ApiConfigService);
   await app.listen(apiConfigService.apiConfig.port);
 }
