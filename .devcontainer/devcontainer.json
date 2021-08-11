@@ -6,6 +6,7 @@
 			"VARIANT": "16"
 		}
 	},
+	"forwardPorts": [5000],
 	"extensions": [
 		"eamodio.gitlens",
 		"mikestead.dotenv",

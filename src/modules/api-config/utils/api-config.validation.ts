@@ -1,8 +1,25 @@
-import { object, number, string } from 'joi';
+import { object, number, string, bool } from 'joi';
 
 export const validationSchema = object({
   API_PORT: number().required(),
   RAPID_API_GOOGLE_TRANSLATE_URL: string().required(),
   RAPID_API_GOOGLE_TRANSLATE_KEY: string().required(),
   RAPID_API_GOOGLE_TRANSLATE_HOST: string().required(),
+  TYPEORM_PORT: number().required(),
+  TYPEORM_LOGGING: bool().required(),
+  TYPEORM_HOST: string().required(),
+  TYPEORM_USERNAME: string().required(),
+  TYPEORM_PASSWORD: string().required(),
+  TYPEORM_CONNECTION: string().required(),
+  TYPEORM_MIGRATIONS_RUN: bool().required(),
+  TYPEORM_DATABASE: string().required(),
+  TYPEORM_ENTITIES: string().required(),
+  TYPEORM_MIGRATIONS_DIR: string().required(),
+  TYPEORM_MIGRATIONS: string().required(),
+  AUTH_JWT_SECRET_KEY: string().required(),
+  AUTH_JWT_STRATEGY: string().required(),
+  AUTH_JWT_EXPIRES_IN: number().required(),
+  AUTH_GOOGLE_CLIENT_ID: string().required(),
+  AUTH_GOOGLE_SECRET_KEY: string().required(),
+  AUTH_GOOGLE_CALLBACK_URL: string().required(),
 });
