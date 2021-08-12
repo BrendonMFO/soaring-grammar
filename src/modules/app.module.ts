@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { GrammarModule } from './grammar/grammar.module';
+import { VocabModule } from './vocab/vocab.module';
 import { ApiConfigModule } from './api-config/api-config.module';
 import { TranslationModule } from './translation/translation.module';
 import { ApiConfigService } from './api-config/services/api-config.service';
@@ -10,7 +10,7 @@ import { ApiConfigService } from './api-config/services/api-config.service';
 @Module({
   imports: [
     UserModule,
-    GrammarModule,
+    VocabModule,
     ApiConfigModule,
     TranslationModule,
     TypeOrmModule.forRootAsync({

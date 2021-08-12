@@ -1,8 +1,8 @@
-import { GrammarLookupEntity } from './grammar-lookup.entity';
+import { VocabLookupEntity } from './vocab-lookup.entity';
 import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity('BOOK_INFO')
-export class GrammarBookEntity extends BaseEntity {
+export class VocabBookEntity extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
@@ -21,6 +21,6 @@ export class GrammarBookEntity extends BaseEntity {
   @Column()
   authors: string;
 
-  @OneToMany(() => GrammarLookupEntity, (grammarLookup) => grammarLookup.book)
-  lookups: GrammarLookupEntity[];
+  @OneToMany(() => VocabLookupEntity, (vocabLookup) => vocabLookup.book)
+  lookups: VocabLookupEntity[];
 }

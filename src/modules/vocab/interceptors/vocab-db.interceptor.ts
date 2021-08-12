@@ -10,22 +10,22 @@ import { catchError, Observable, tap } from 'rxjs';
 import { getConnection } from 'typeorm';
 
 @Injectable()
-export class GrammarDbInterceptor implements NestInterceptor {
+export class VocabDbInterceptor implements NestInterceptor {
   intercept(
     context: ExecutionContext,
     next: CallHandler<unknown>,
   ): Observable<unknown> {
     const request: Request = context.switchToHttp().getRequest();
     return next.handle().pipe(
-      tap(() => this.grammarDbFinalize(request.file)),
+      tap(() => this.vocabDbFinalize(request.file)),
       catchError((error) => {
-        this.grammarDbFinalize(request.file);
+        this.vocabDbFinalize(request.file);
         throw error;
       }),
     );
   }
 
-  private async grammarDbFinalize(file?: Express.Multer.File): Promise<void> {
+  private async vocabDbFinalize(file?: Express.Multer.File): Promise<void> {
     if (!file) return;
     await Promise.all([
       unlink(file.path),

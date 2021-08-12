@@ -4,7 +4,7 @@ import { TranslationDto } from '../dtos/translation.dto';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { AuthGuardType } from '@modules/auth/shared/auth.constants';
 import { TranslationService } from '../services/translation.service';
-import { GoogleTranslateResponse } from '../models/google-translate-response.model';
+import { GoogleTranslateResponseDto } from '../dtos/google-translate-response.dto';
 
 @UseGuards(AuthGuard(AuthGuardType.JWT))
 @Controller({ version: '1', path: 'translation' })
@@ -14,7 +14,7 @@ export class TranslationController {
   @Post()
   translate(
     @Body() translationDto: TranslationDto,
-  ): Observable<GoogleTranslateResponse> {
+  ): Observable<GoogleTranslateResponseDto> {
     return this.translationService.translate(translationDto);
   }
 }

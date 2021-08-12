@@ -1,7 +1,15 @@
-import { GrammarLookupEntity } from './grammar-lookup.entity';
-import { Column, Entity, BaseEntity, PrimaryColumn, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  ManyToOne,
+  BaseEntity,
+  PrimaryColumn,
+} from 'typeorm';
+import { GrammarPhraseEntity } from './grammar-phrase.entity';
+import { UserEntity } from '@modules/user/entities/user.entity';
 
-@Entity('WORDS')
+@Entity('tab_grammar_words')
 export class GrammarWordEntity extends BaseEntity {
   @PrimaryColumn()
   id: string;
@@ -12,18 +20,16 @@ export class GrammarWordEntity extends BaseEntity {
   @Column()
   stem: string;
 
-  @Column()
-  lang: string;
+  @Column({ nullable: false })
+  userId: number;
 
-  @Column()
-  category: number;
+  @OneToMany(
+    () => GrammarPhraseEntity,
+    (grammarPhrase) => grammarPhrase.grammarWord,
+    { cascade: true },
+  )
+  phrases: GrammarPhraseEntity[];
 
-  @Column()
-  timestamp: number;
-
-  @Column()
-  profileid: string;
-
-  @OneToMany(() => GrammarLookupEntity, (grammarLookup) => grammarLookup.word)
-  lookups: GrammarLookupEntity[];
+  @ManyToOne(() => UserEntity, (user) => user.words)
+  user: UserEntity;
 }

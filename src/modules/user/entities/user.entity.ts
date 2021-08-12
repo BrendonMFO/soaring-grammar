@@ -1,11 +1,13 @@
 import {
   Column,
   Entity,
+  OneToMany,
   BaseEntity,
   CreateDateColumn,
   DeleteDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { GrammarWordEntity } from '@modules/grammar/entities/grammar-word.entity';
 
 @Entity('tab_users')
 export class UserEntity extends BaseEntity {
@@ -23,6 +25,9 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   lastName: string;
+
+  @OneToMany(() => GrammarWordEntity, (grammarWord) => grammarWord.user)
+  words: GrammarWordEntity[];
 
   @CreateDateColumn()
   createdAt: Date;

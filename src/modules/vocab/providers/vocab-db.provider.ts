@@ -2,13 +2,12 @@ import { Request } from 'express';
 import { REQUEST } from '@nestjs/core';
 import { createConnection } from 'typeorm';
 import { FactoryProvider, Scope } from '@nestjs/common';
-import { GrammarWordEntity } from '../entities/grammar-word.entity';
-import { GrammarBookEntity } from '../entities/grammar-book.entity';
-import { GrammarLookupEntity } from '../entities/grammar-lookup.entity';
+import { GRAMMAR_DB } from '../shared/vocab.constants';
+import { VocabWordEntity } from '../entities/vocab-word.entity';
+import { VocabBookEntity } from '../entities/vocab-book.entity';
+import { VocabLookupEntity } from '../entities/vocab-lookup.entity';
 
-export const GRAMMAR_DB = Symbol('__grammar_db_provider__');
-
-export const grammarDbProvider: FactoryProvider = {
+export const vocabDbProvider: FactoryProvider = {
   inject: [REQUEST],
   provide: GRAMMAR_DB,
   scope: Scope.REQUEST,
@@ -19,7 +18,7 @@ export const grammarDbProvider: FactoryProvider = {
       type: 'sqlite',
       name: file.filename,
       database: file.path,
-      entities: [GrammarWordEntity, GrammarLookupEntity, GrammarBookEntity],
+      entities: [VocabWordEntity, VocabLookupEntity, VocabBookEntity],
     });
   },
 };

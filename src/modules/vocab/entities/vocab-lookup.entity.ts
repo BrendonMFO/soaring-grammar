@@ -6,11 +6,11 @@ import {
   JoinColumn,
   PrimaryColumn,
 } from 'typeorm';
-import { GrammarBookEntity } from './grammar-book.entity';
-import { GrammarWordEntity } from './grammar-word.entity';
+import { VocabBookEntity } from './vocab-book.entity';
+import { VocabWordEntity } from './vocab-word.entity';
 
 @Entity('LOOKUPS')
-export class GrammarLookupEntity extends BaseEntity {
+export class VocabLookupEntity extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
@@ -33,10 +33,10 @@ export class GrammarLookupEntity extends BaseEntity {
   timestamp: number;
 
   @JoinColumn({ name: 'book_key' })
-  @ManyToOne(() => GrammarBookEntity, (grammarBook) => grammarBook.lookups)
-  book: GrammarBookEntity;
+  @ManyToOne(() => VocabBookEntity, (vocabBook) => vocabBook.lookups)
+  book: VocabBookEntity;
 
   @JoinColumn({ name: 'word_key' })
-  @ManyToOne(() => GrammarWordEntity, (grammarWord) => grammarWord.lookups)
-  word: GrammarWordEntity[];
+  @ManyToOne(() => VocabWordEntity, (vocabWord) => vocabWord.lookups)
+  word: VocabWordEntity[];
 }

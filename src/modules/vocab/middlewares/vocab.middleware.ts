@@ -1,10 +1,10 @@
 import { Multer } from 'multer';
+import { MULTER } from '../shared/vocab.constants';
 import { NextFunction, Request, Response } from 'express';
-import { MULTER } from '../providers/grammar-multer.provider';
 import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
 
 @Injectable()
-export class GrammarMiddleware implements NestMiddleware {
+export class VocabMiddleware implements NestMiddleware {
   @Inject(MULTER)
   private readonly multer: Multer;
 

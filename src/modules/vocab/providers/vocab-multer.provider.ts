@@ -1,9 +1,8 @@
 import * as multer from 'multer';
 import { ValueProvider } from '@nestjs/common';
+import { MULTER } from '../shared/vocab.constants';
 
-export const MULTER = Symbol('__multer_provider__');
-
-export const grammarMulterProvider: ValueProvider = {
+export const vocabMulterProvider: ValueProvider = {
   provide: MULTER,
   useValue: multer({ dest: '.' }),
 };
