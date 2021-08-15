@@ -13,11 +13,11 @@
     "incremental": true,
     "skipLibCheck": true,
     "paths": {
-      "@common/*": [
-        "src/common/*"
+      "@core/*": [
+        "src/core/*"
       ],
-      "@modules/*": [
-        "src/modules/*"
+      "@data-layer/*": [
+        "src/data-layer/*"
       ]
     }
   },
