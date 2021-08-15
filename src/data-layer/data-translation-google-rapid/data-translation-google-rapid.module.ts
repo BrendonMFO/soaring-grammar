@@ -1,7 +1,7 @@
 import { HttpModule } from '@nestjs/axios';
 import { DynamicModule, Module } from '@nestjs/common';
 import { TranslationGoogleRapidService } from './services/translation-google-rapid.service';
-import { TRANSLATION_SERVICE } from '@core/translation/constants/translation-keys.constants';
+import { TRANSLATION_DATA_SERVICE } from '@core/translation/constants/translation-keys.constants';
 import { TRANSLATION_GOOGLE_RAPID_OPTIONS } from './constants/translation-google-rapid-keys.constants';
 import { TranslationGoogleRapidOptions } from './interfaces/translation-google-rapid-options.interface';
 import { translationGoogleRapidOptionsProvider } from './providers/translation-google-rapid-options.provider';
@@ -33,7 +33,7 @@ export class TranslationGoogleRapidModule {
         TranslationGoogleRapidService,
         translationDataServiceProvider(TranslationGoogleRapidService),
       ],
-      exports: [TRANSLATION_SERVICE],
+      exports: [TRANSLATION_DATA_SERVICE],
     };
   }
 }

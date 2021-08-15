@@ -10,7 +10,7 @@ import { TranslationModule } from './core/translation/translation.module';
 import { DataGrammarModule } from '@data-layer/data-grammar/data-grammar.module';
 import { ApiConfigService } from './core/api-config/services/api-config.service';
 import { DataVocabKindleModule } from '@data-layer/data-vocab-kindle/data-vocab-kindle.module';
-import { TranslationGoogleRapidModule } from './data-layer/data-translation-google-rapid/data-translation-google-rapid.module';
+import { DataTranslationGoogleModule } from '@data-layer/data-translation-google/data-translation-google.module';
 
 @Module({
   imports: [
@@ -18,6 +18,7 @@ import { TranslationGoogleRapidModule } from './data-layer/data-translation-goog
     UserModule.forModule(DataUserModule),
     GrammarModule.forModule(DataGrammarModule),
     VocabModule.forModule(DataVocabKindleModule, DataGrammarModule),
+    TranslationModule.forModule(DataTranslationGoogleModule, DataGrammarModule),
     AuthModule.forRootAsync({
       inject: [ApiConfigService],
       userDataModule: DataUserModule,
@@ -33,14 +34,6 @@ import { TranslationGoogleRapidModule } from './data-layer/data-translation-goog
       inject: [ApiConfigService],
       useFactory: ({ databaseConfig }: ApiConfigService) => databaseConfig,
     }),
-    TranslationModule.forModuleAsync(
-      TranslationGoogleRapidModule.forRootAsync({
-        inject: [ApiConfigService],
-        useFactory: ({
-          rapidApiConfig: { googleTranslate },
-        }: ApiConfigService) => googleTranslate,
-      }),
-    ),
   ],
 })
 export class AppModule {}

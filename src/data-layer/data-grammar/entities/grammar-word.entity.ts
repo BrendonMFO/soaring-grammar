@@ -8,9 +8,10 @@ import {
 } from 'typeorm';
 import { GrammarPhraseEntity } from './grammar-phrase.entity';
 import { UserEntity } from '@data-layer/data-user/entities/user.entity';
+import { GrammarWord } from '@core/grammar/interfaces/grammar-word.interface';
 
 @Entity('tab_grammar_words')
-export class GrammarWordEntity extends BaseEntity {
+export class GrammarWordEntity extends BaseEntity implements GrammarWord {
   @PrimaryColumn()
   id: string;
 

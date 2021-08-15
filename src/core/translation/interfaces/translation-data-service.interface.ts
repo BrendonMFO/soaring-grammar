@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
-import { TranslationDataDto } from './translation-data-dto.interface';
+import { TranslationParams } from './translation-params.interface';
 import { TranslationResultDto } from './translation-result-dto.interface';
 
 export interface TranslationDataService {
   translate(
-    translateDataDto: TranslationDataDto,
+    translateDataDto: TranslationParams,
   ): Observable<TranslationResultDto>;
 }

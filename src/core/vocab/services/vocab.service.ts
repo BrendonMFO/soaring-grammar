@@ -7,12 +7,11 @@ import { GrammarDataService } from '@core/grammar/interfaces/grammar-data-servic
 
 @Injectable()
 export class VocabService {
-  constructor(
-    @Inject(VOCAB_DATA_SERVICE)
-    private readonly vocabDataService: VocabDataService,
-    @Inject(GRAMMAR_DATA_SERVICE)
-    private readonly grammarDataService: GrammarDataService,
-  ) {}
+  @Inject(VOCAB_DATA_SERVICE)
+  private readonly vocabDataService: VocabDataService;
+
+  @Inject(GRAMMAR_DATA_SERVICE)
+  private readonly grammarDataService: GrammarDataService;
 
   async uploadVocab(userId: number): Promise<GrammarWord[]> {
     const vocabWords = await this.vocabDataService.extractGrammar();

@@ -1,5 +1,4 @@
 export interface TranslationDataDto {
-  text: string;
-  sourceLanguage?: string;
-  destinationLanguage: string;
+  tl: string;
+  sl?: string;
 }

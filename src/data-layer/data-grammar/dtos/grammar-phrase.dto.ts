@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { Trim } from '@neuralegion/class-sanitizer';
 import { GrammarPhrase } from '@core/grammar/interfaces/grammar-phrase.interface';
 
@@ -9,4 +9,9 @@ export class GrammarPhraseDto implements GrammarPhrase {
   @Trim()
   @IsString()
   readonly phrase: string;
+
+  @Trim()
+  @IsString()
+  @IsOptional()
+  readonly translatedPhrase?: string;
 }

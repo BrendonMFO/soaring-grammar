@@ -1,8 +1,9 @@
 import { GrammarWordEntity } from './grammar-word.entity';
 import { Column, Entity, ManyToOne, BaseEntity, PrimaryColumn } from 'typeorm';
+import { GrammarPhrase } from '@core/grammar/interfaces/grammar-phrase.interface';
 
 @Entity('tab_grammar_phrases')
-export class GrammarPhraseEntity extends BaseEntity {
+export class GrammarPhraseEntity extends BaseEntity implements GrammarPhrase {
   @PrimaryColumn()
   id: string;
 
@@ -10,7 +11,7 @@ export class GrammarPhraseEntity extends BaseEntity {
   phrase: string;
 
   @Column({ type: 'text', nullable: true, default: null })
-  translatedPhrase: string;
+  translatedPhrase?: string;
 
   @ManyToOne(() => GrammarWordEntity, (grammarWord) => grammarWord.phrases)
   grammarWord: GrammarWordEntity;

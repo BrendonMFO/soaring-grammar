@@ -1,1 +1,1 @@
-export const TRANSLATION_SERVICE = Symbol('__translation_service__');
+export const TRANSLATION_DATA_SERVICE = Symbol('__translation_data_service__');
