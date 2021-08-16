@@ -13,6 +13,9 @@ export class GrammarPhraseEntity extends BaseEntity implements GrammarPhrase {
   @Column({ type: 'text', nullable: true, default: null })
   translatedPhrase?: string;
 
+  @Column({ nullable: false, default: false })
+  synthesized?: boolean;
+
   @ManyToOne(() => GrammarWordEntity, (grammarWord) => grammarWord.phrases)
   grammarWord: GrammarWordEntity;
 }

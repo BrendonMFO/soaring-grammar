@@ -403,6 +403,13 @@
   resolved "https://registry.yarnpkg.com/@google-cloud/promisify/-/promisify-2.0.3.tgz#f934b5cdc939e3c7039ff62b9caaf59a9d89e3a8"
   integrity sha512-d4VSA86eL/AFTe5xtyZX+ePUjE8dIFu2T8zmdeNBSa5/kNgXPCx/o/wbFNHAGLJdGnk1vddRuMESD9HbOC8irw==
 
+"@google-cloud/text-to-speech@^3.2.6":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@google-cloud/text-to-speech/-/text-to-speech-3.2.6.tgz#0292e42a0032622908215a7f85cfee9668a420b4"
+  integrity sha512-HIWNvqE5ri75dvT0EAycGBcyZd8XbuvE8+CwBh83HU74JRTYtzWBGmiIyT8cI+niGWUmZtwSxBcJWZSAsDrXSw==
+  dependencies:
+    google-gax "^2.17.1"
+
 "@google-cloud/translate@^6.2.6":
   version "6.2.6"
   resolved "https://registry.yarnpkg.com/@google-cloud/translate/-/translate-6.2.6.tgz#9cc17e8377d1bb23cae44f2d3b6d453f6c802ec7"

@@ -24,6 +24,7 @@
     "db:migration-create": "ts-node -r tsconfig-paths/register node_modules/.bin/typeorm migration:create --name"
   },
   "dependencies": {
+    "@google-cloud/text-to-speech": "^3.2.6",
     "@google-cloud/translate": "^6.2.6",
     "@nestjs/axios": "^0.0.1",
     "@nestjs/common": "^8.0.0",

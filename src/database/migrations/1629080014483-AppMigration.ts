@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from 'typeorm';
 
-export class AppMigration1628990543391 implements MigrationInterface {
-  name = 'AppMigration1628990543391';
+export class AppMigration1629080014483 implements MigrationInterface {
+  name = 'AppMigration1629080014483';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
@@ -11,7 +11,7 @@ export class AppMigration1628990543391 implements MigrationInterface {
       `CREATE TABLE \`soaring\`.\`tab_grammar_words\` (\`id\` varchar(255) NOT NULL, \`word\` varchar(255) NOT NULL, \`stem\` varchar(255) NOT NULL, \`userId\` int NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
     await queryRunner.query(
-      `CREATE TABLE \`soaring\`.\`tab_grammar_phrases\` (\`id\` varchar(255) NOT NULL, \`phrase\` text NOT NULL, \`translatedPhrase\` text NULL, \`grammarWordId\` varchar(255) NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
+      `CREATE TABLE \`soaring\`.\`tab_grammar_phrases\` (\`id\` varchar(255) NOT NULL, \`phrase\` text NOT NULL, \`translatedPhrase\` text NULL, \`synthesized\` tinyint NOT NULL DEFAULT 0, \`grammarWordId\` varchar(255) NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`,
     );
     await queryRunner.query(
       `ALTER TABLE \`soaring\`.\`tab_grammar_words\` ADD CONSTRAINT \`FK_cac7b0712247e30a40ed2ef4077\` FOREIGN KEY (\`userId\`) REFERENCES \`soaring\`.\`tab_users\`(\`id\`) ON DELETE NO ACTION ON UPDATE NO ACTION`,
