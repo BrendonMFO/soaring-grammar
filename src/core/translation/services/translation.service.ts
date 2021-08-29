@@ -1,16 +1,15 @@
 import { lastValueFrom } from 'rxjs';
 import { Inject, Injectable } from '@nestjs/common';
+import { GrammarService } from '@core/grammar/services/grammar.service';
 import { TranslationDataDto } from '../interfaces/translation-data-dto.interface';
 import { GrammarPhrase } from '@core/grammar/interfaces/grammar-phrase.interface';
 import { TRANSLATION_DATA_SERVICE } from '../constants/translation-keys.constants';
-import { GRAMMAR_DATA_SERVICE } from '@core/grammar/constants/grammar-keys.constants';
 import { TranslationDataService } from '../interfaces/translation-data-service.interface';
-import { GrammarDataService } from '@core/grammar/interfaces/grammar-data-service.interface';
 
 @Injectable()
 export class TranslationService {
-  @Inject(GRAMMAR_DATA_SERVICE)
-  private readonly grammarDataService: GrammarDataService;
+  @Inject()
+  private readonly grammarService: GrammarService;
 
   @Inject(TRANSLATION_DATA_SERVICE)
   private readonly translationDataService: TranslationDataService;
@@ -19,7 +18,7 @@ export class TranslationService {
     grammarPhraseId: string,
     translationDataDto: TranslationDataDto,
   ): Promise<GrammarPhrase> {
-    const grammarPhrase = await this.grammarDataService.getGrammarPhraseById(
+    const grammarPhrase = await this.grammarService.getGrammarPhraseById(
       grammarPhraseId,
     );
 
@@ -33,6 +32,6 @@ export class TranslationService {
 
     grammarPhrase.translatedPhrase = translation.translatedResults[0];
 
-    return this.grammarDataService.save(grammarPhrase);
+    return this.grammarService.save(grammarPhrase);
   }
 }

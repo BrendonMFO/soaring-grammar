@@ -22,5 +22,6 @@ export const validationSchema = object({
   AUTH_GOOGLE_CLIENT_ID: string().required(),
   AUTH_GOOGLE_SECRET_KEY: string().required(),
   AUTH_GOOGLE_CALLBACK_URL: string().required(),
+  AUTH_REDIRECT_URL: string().required(),
   GOOGLE_APPLICATION_CREDENTIALS: string().required(),
 });

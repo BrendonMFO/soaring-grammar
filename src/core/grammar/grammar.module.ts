@@ -1,12 +1,8 @@
-import { DynamicModule, Module, Type } from '@nestjs/common';
+import { Module } from '@nestjs/common';
+import { GrammarService } from './services/grammar.service';
 
-@Module({})
-export class GrammarModule {
-  static forModule(classModule: DynamicModule | Type): DynamicModule {
-    return {
-      module: GrammarModule,
-      imports: [classModule],
-      exports: [classModule],
-    };
-  }
-}
+@Module({
+  providers: [GrammarService],
+  exports: [GrammarService],
+})
+export class GrammarModule {}

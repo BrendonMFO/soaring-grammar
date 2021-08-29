@@ -9,8 +9,8 @@ import { VocabKindleLookupEntity } from '../entities/vocab-kindle-lookup.entity'
 
 export const dataVocabKindleDbProvider = (): FactoryProvider => ({
   inject: [REQUEST],
-  provide: VOCAB_KINDLE_DB,
   scope: Scope.REQUEST,
+  provide: VOCAB_KINDLE_DB,
   useFactory: (request: Request): Promise<Connection> => {
     const { file } = request;
     return createConnection({

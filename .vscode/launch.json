@@ -17,5 +17,15 @@
                 "<node_internals>/**"
             ]
         },
+        {
+            "name": "Debug",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "runtimeExecutable": "yarn",
+            "runtimeArgs": [
+                "start:debug"
+            ]
+        },
     ]
 }

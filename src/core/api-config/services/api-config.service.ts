@@ -5,6 +5,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ApiConfig } from '../interfaces/api-config.interface';
 import { AuthJwtConfig } from '../interfaces/auth-jwt-config.interface';
 import { RapidApiConfig } from '../interfaces/rapid-api-config.interface';
+import { AuthRedirect } from '@core/auth/interfaces/auth-redirect.interface';
 import { AuthGoogleOptions } from '../interfaces/auth-google-config.interface';
 
 @Injectable()
@@ -58,6 +59,12 @@ export class ApiConfigService {
       clientID: this.configService.get<string>('AUTH_GOOGLE_CLIENT_ID'),
       callbackURL: this.configService.get<string>('AUTH_GOOGLE_CALLBACK_URL'),
       clientSecret: this.configService.get<string>('AUTH_GOOGLE_SECRET_KEY'),
+    };
+  }
+
+  get authRedirect(): AuthRedirect {
+    return {
+      url: this.configService.get<string>('AUTH_REDIRECT_URL'),
     };
   }
 }

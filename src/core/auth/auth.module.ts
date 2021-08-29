@@ -44,7 +44,7 @@ export class AuthModule {
   static forRootAsync(optionsAsync: AuthModuleAsyncOptions): DynamicModule {
     return {
       module: AuthModule,
-      imports: [UserModule.forModule(optionsAsync.userDataModule)],
+      imports: [UserModule],
       controllers: [AuthController],
       providers: [authModuleOptionsProvider(optionsAsync)],
     };
