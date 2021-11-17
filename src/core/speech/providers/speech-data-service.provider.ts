@@ -1,5 +1,5 @@
 import { ExistingProvider, Type } from '@nestjs/common';
-import { SPEECH_DATA_SERVICE } from '../constants/speech.constants';
+import { SPEECH_DATA_SERVICE } from '../constants/speech-keys.constants';
 import { SpeechDataService } from '../interfaces/speech-data-service.interface';
 
 export const speechDataServiceProvider = (

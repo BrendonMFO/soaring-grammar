@@ -6,11 +6,15 @@ import { Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Inject, Injectable } from '@nestjs/common';
 import { AuthUser } from '../interfaces/auth-user.interface';
+import { AuthGuardType } from '../constants/auth-guard-type.constants';
 import { AuthJwtOptions } from '../interfaces/auth-jwt-options.interface';
 import { AuthUserService } from '../interfaces/auth-user-service.interface';
 
 @Injectable()
-export class AuthJwtStrategy extends PassportStrategy(Strategy, 'jwt') {
+export class AuthJwtStrategy extends PassportStrategy(
+  Strategy,
+  AuthGuardType.JWT,
+) {
   constructor(
     @Inject(AUTH_USER_SERVICE)
     private readonly authUserService: AuthUserService,

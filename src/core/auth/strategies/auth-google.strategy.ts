@@ -3,10 +3,15 @@ import { Inject, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { GoogleUserDto } from '../dtos/google-user.dto';
 import { AUTH_GOOGLE_OPTIONS } from '../constants/auth-keys.constants';
+import { AuthGuardType } from '../constants/auth-guard-type.constants';
 import { AuthGoogleOptions } from '../interfaces/auth-google-options.interface';
+import { AuthGoogleProfile } from '../interfaces/auth-google-profile.interface';
 
 @Injectable()
-export class AuthGoogleStrategy extends PassportStrategy(Strategy, 'google') {
+export class AuthGoogleStrategy extends PassportStrategy(
+  Strategy,
+  AuthGuardType.GOOGLE,
+) {
   constructor(
     @Inject(AUTH_GOOGLE_OPTIONS) googleModuleOptions: AuthGoogleOptions,
   ) {
@@ -16,11 +21,7 @@ export class AuthGoogleStrategy extends PassportStrategy(Strategy, 'google') {
   validate(
     accessToken: string,
     _refreshToken: string,
-    profile: {
-      id: string;
-      emails: { value: string }[];
-      name: { givenName: string; familyName: string };
-    },
+    profile: AuthGoogleProfile,
   ): GoogleUserDto {
     const { id, name, emails } = profile;
     return {

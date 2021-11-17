@@ -18,7 +18,10 @@
       ],
       "@data-layer/*": [
         "src/data-layer/*"
-      ]
+      ],
+      "@modules/*": [
+        "src/modules/*"
+      ],
     }
   },
   "include": [

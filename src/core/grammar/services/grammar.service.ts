@@ -1,16 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { GrammarWord } from '../interfaces/grammar-word.interface';
+import { GrammarPhrase } from '../interfaces/grammar-phrase.interface';
+import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 import { GRAMMAR_DATA_SERVICE } from '../constants/grammar-keys.constants';
 import { GrammarDataService } from '../interfaces/grammar-data-service.interface';
-import { GrammarPhrase } from '../interfaces/grammar-phrase.interface';
 
 @Injectable()
 export class GrammarService {
   @Inject(GRAMMAR_DATA_SERVICE)
   private readonly grammarDataService: GrammarDataService;
 
-  getGrammarPhraseById(id: string): Promise<GrammarPhrase> {
-    return this.grammarDataService.getGrammarPhraseById(id);
+  getGrammarPhraseById(phraseId: string): Promise<GrammarPhrase> {
+    return this.grammarDataService.getGrammarPhraseById(phraseId);
   }
 
   save(grammarPhrase: GrammarPhrase): Promise<GrammarPhrase> {
@@ -22,5 +23,12 @@ export class GrammarService {
     grammarWords: GrammarWord[],
   ): Promise<GrammarWord[]> {
     return this.grammarDataService.syncGrammar(userId, grammarWords);
+  }
+
+  paginate(
+    userId: number,
+    options: IPaginationOptions,
+  ): Promise<Pagination<GrammarWord>> {
+    return this.grammarDataService.paginate(userId, options);
   }
 }

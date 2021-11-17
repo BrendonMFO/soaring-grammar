@@ -1,17 +1,10 @@
+import { Module } from '@nestjs/common';
 import { VocabService } from './services/vocab.service';
-import { Module, MiddlewareConsumer } from '@nestjs/common';
-import { GrammarModule } from '@core/grammar/grammar.module';
-import { VocabController } from './controllers/vocab.controller';
-import { VocabMiddleware } from './middlewares/vocab.middleware';
+import { MULTER } from './constants/vocab-keys.constants';
 import { vocabMulterProvider } from './providers/vocab-multer.provider';
 
 @Module({
-  imports: [GrammarModule],
-  controllers: [VocabController],
   providers: [VocabService, vocabMulterProvider()],
+  exports: [VocabService, MULTER],
 })
-export class VocabModule {
-  configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(VocabMiddleware).forRoutes('v1/vocab');
-  }
-}
+export class VocabModule {}

@@ -1,3 +1,8 @@
+import {
+  paginate,
+  Pagination,
+  IPaginationOptions,
+} from 'nestjs-typeorm-paginate';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -49,5 +54,15 @@ export class DataGrammarService implements GrammarDataService {
 
   getGrammarPhraseById(id: string): Promise<GrammarPhrase> {
     return this.grammarPhraseRepository.findOneOrFail(id);
+  }
+
+  paginate(
+    userId: number,
+    options: IPaginationOptions,
+  ): Promise<Pagination<GrammarWordEntity>> {
+    return paginate<GrammarWordEntity>(this.grammarWordRepository, options, {
+      userId,
+      relations: ['phrases'],
+    });
   }
 }
