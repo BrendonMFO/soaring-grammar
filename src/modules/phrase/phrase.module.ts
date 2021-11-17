@@ -14,6 +14,6 @@ import { VocabMiddleware } from '@core/vocab/middlewares/vocab.middleware';
 })
 export class PhraseModule {
   configure(consumer: MiddlewareConsumer): void {
-    consumer.apply(VocabMiddleware).forRoutes('v1/phrase/grammar/upload');
+    consumer.apply(VocabMiddleware).forRoutes('v1/phrase/database');
   }
 }

@@ -13,6 +13,7 @@ export const dataVocabKindleDbProvider = (): FactoryProvider => ({
   provide: VOCAB_KINDLE_DB,
   useFactory: (request: Request): Promise<Connection> => {
     const { file } = request;
+    if (!file) return;
     return createConnection({
       logging: false,
       type: 'sqlite',

@@ -8,6 +8,8 @@ export const dataVocabKindleDbEntityProvider = <T>(
   provide: provide,
   scope: Scope.REQUEST,
   inject: [VOCAB_KINDLE_DB],
-  useFactory: (connection: Connection): Repository<T> =>
-    connection.getRepository(provide),
+  useFactory: (connection: Connection): Repository<T> => {
+    if (!connection) return;
+    return connection.getRepository(provide);
+  },
 });

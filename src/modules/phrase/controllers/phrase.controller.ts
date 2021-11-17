@@ -27,7 +27,6 @@ import { AuthGuardType } from '@core/auth/constants/auth-guard-type.constants';
 import { GrammarPhrase } from '@core/grammar/interfaces/grammar-phrase.interface';
 import { VocabDbInterceptor } from '@core/vocab/interceptors/vocab-db.interceptor';
 
-@UseInterceptors(VocabDbInterceptor)
 @UseGuards(AuthGuard(AuthGuardType.JWT))
 @Controller({ version: PHRASE_ROUTE_VERSIONS, path: PHRASE_ROUTE_PATH })
 export class PhraseController {
@@ -48,13 +47,14 @@ export class PhraseController {
   }
 
   @Post(PhraseRoutes.PHRASE_DATABASE)
+  @UseInterceptors(VocabDbInterceptor)
   phraseDatabase(@AuthUser() user: User): Promise<GrammarWord[]> {
     return this.phraseService.database(user.id);
   }
 
   @Post(PhraseRoutes.PHRASE_TRANSLATE)
   phraseTranslate(
-    @Param(':phraseId') phraseId: string,
+    @Param('phraseId') phraseId: string,
     @Body() phraseTransleDto: PhraseTranslateDto,
   ): Promise<GrammarPhrase> {
     return this.phraseService.translate(phraseId, phraseTransleDto);
@@ -62,7 +62,7 @@ export class PhraseController {
 
   @Post(PhraseRoutes.PHRASE_SYNTHESIZE)
   phraseSynthetise(
-    @Param(':phraseId') phraseId: string,
+    @Param('phraseId') phraseId: string,
   ): Promise<GrammarPhrase> {
     return this.phraseService.synthesise(phraseId);
   }
