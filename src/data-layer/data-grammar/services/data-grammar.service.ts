@@ -3,8 +3,8 @@ import {
   Pagination,
   IPaginationOptions,
 } from 'nestjs-typeorm-paginate';
-import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
+import { IsNull, Not, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { GrammarWordDto } from '../dtos/grammar-word.dto';
 import { classToClassFromExist } from 'class-transformer';
@@ -25,6 +25,30 @@ export class DataGrammarService implements GrammarDataService {
   @InjectRepository(GrammarPhraseEntity)
   private readonly grammarPhraseRepository: Repository<GrammarPhraseEntity>;
 
+  getGrammarPhraseById(id: string): Promise<GrammarPhrase> {
+    return this.grammarPhraseRepository.findOneOrFail(id);
+  }
+
+  getCompletedGrammarByUser(userId: number): Promise<GrammarPhrase[]> {
+    return this.grammarPhraseRepository.find({
+      relations: ['grammarWord'],
+      join: { alias: 'phrases', innerJoin: { word: 'phrases.grammarWord' } },
+      where: (qb) => {
+        qb.where({
+          synthesized: true,
+          translatedPhrase: Not(IsNull()),
+        }).andWhere('word.userId = :userId', { userId });
+      },
+    });
+  }
+
+  @Sanitize()
+  save(
+    @Bind(GrammarPhraseDto) grammarPhrase: GrammarPhrase,
+  ): Promise<GrammarPhrase> {
+    return this.grammarPhraseRepository.save(grammarPhrase);
+  }
+
   @Sanitize()
   syncGrammar(
     userId: number,
@@ -43,17 +67,6 @@ export class DataGrammarService implements GrammarDataService {
         return this.grammarWordRepository.save(newWord);
       }),
     );
-  }
-
-  @Sanitize()
-  save(
-    @Bind(GrammarPhraseDto) grammarPhrase: GrammarPhrase,
-  ): Promise<GrammarPhrase> {
-    return this.grammarPhraseRepository.save(grammarPhrase);
-  }
-
-  getGrammarPhraseById(id: string): Promise<GrammarPhrase> {
-    return this.grammarPhraseRepository.findOneOrFail(id);
   }
 
   paginate(

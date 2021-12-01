@@ -3,14 +3,16 @@ import { GrammarPhrase } from './grammar-phrase.interface';
 import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 
 export interface GrammarDataService {
+  getGrammarPhraseById(id: string): Promise<GrammarPhrase>;
+
+  getCompletedGrammarByUser(userId: number): Promise<GrammarPhrase[]>;
+
+  save(grammarPhrase: GrammarPhrase): Promise<GrammarPhrase>;
+
   syncGrammar(
     userId: number,
     grammarWords: GrammarWord[],
   ): Promise<GrammarWord[]>;
-
-  getGrammarPhraseById(id: string): Promise<GrammarPhrase>;
-
-  save(grammarPhrase: GrammarPhrase): Promise<GrammarPhrase>;
 
   paginate(
     userId: number,

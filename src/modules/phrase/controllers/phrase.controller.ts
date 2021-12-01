@@ -8,7 +8,6 @@ import {
   UseGuards,
   Controller,
   ParseIntPipe,
-  UseInterceptors,
   DefaultValuePipe,
 } from '@nestjs/common';
 import {
@@ -25,7 +24,6 @@ import { AuthUser } from '@core/auth/decorators/auth-user.decorator';
 import { GrammarWord } from '@core/grammar/interfaces/grammar-word.interface';
 import { AuthGuardType } from '@core/auth/constants/auth-guard-type.constants';
 import { GrammarPhrase } from '@core/grammar/interfaces/grammar-phrase.interface';
-import { VocabDbInterceptor } from '@core/vocab/interceptors/vocab-db.interceptor';
 
 @UseGuards(AuthGuard(AuthGuardType.JWT))
 @Controller({ version: PHRASE_ROUTE_VERSIONS, path: PHRASE_ROUTE_PATH })
@@ -44,12 +42,6 @@ export class PhraseController {
       limit,
       route: `/v1/${PHRASE_ROUTE_PATH}`,
     });
-  }
-
-  @Post(PhraseRoutes.PHRASE_DATABASE)
-  @UseInterceptors(VocabDbInterceptor)
-  phraseDatabase(@AuthUser() user: User): Promise<GrammarWord[]> {
-    return this.phraseService.database(user.id);
   }
 
   @Post(PhraseRoutes.PHRASE_TRANSLATE)

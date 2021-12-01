@@ -5,7 +5,6 @@ import {
 } from 'nestjs-typeorm-paginate';
 import { Injectable } from '@nestjs/common';
 import { PhraseTranslateDto } from '../dtos/phrase-translate.dto';
-import { VocabService } from '@core/vocab/services/vocab.service';
 import { SpeechService } from '@core/speech/services/speech.service';
 import { GrammarService } from '@core/grammar/services/grammar.service';
 import { GrammarWord } from '@core/grammar/interfaces/grammar-word.interface';
@@ -15,7 +14,6 @@ import { TranslationService } from '@core/translation/services/translation.servi
 @Injectable()
 export class PhraseService {
   constructor(
-    private readonly vocabService: VocabService,
     private readonly speechService: SpeechService,
     private readonly grammarService: GrammarService,
     private readonly translationService: TranslationService,
@@ -26,11 +24,6 @@ export class PhraseService {
     options: IPaginationOptions,
   ): Promise<Pagination<GrammarWord, IPaginationMeta>> {
     return this.grammarService.paginate(userId, options);
-  }
-
-  async database(userId: number): Promise<GrammarWord[]> {
-    const grammar = await this.vocabService.extractGrammar();
-    return this.grammarService.syncGrammar(userId, grammar);
   }
 
   async synthesise(phraseId: string): Promise<GrammarPhrase> {
