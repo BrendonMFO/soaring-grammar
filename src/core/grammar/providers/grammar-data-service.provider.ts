@@ -4,7 +4,7 @@ import { GrammarDataService } from '../interfaces/grammar-data-service.interface
 
 export const grammarDataServiceProvider = (
   classType: Type<GrammarDataService>,
-): ExistingProvider => ({
+): ExistingProvider<GrammarDataService> => ({
   provide: GRAMMAR_DATA_SERVICE,
   useExisting: classType,
 });

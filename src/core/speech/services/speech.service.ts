@@ -19,6 +19,6 @@ export class SpeechService {
   async synthesize(phraseId: string, phrase: string): Promise<void> {
     const result = await this.speechDataService.synthesize(phrase);
     const path = format(SPEECH_AUDIO_PATH, phraseId);
-    this.writeFile(path, result, 'binary');
+    return this.writeFile(path, result, 'binary');
   }
 }

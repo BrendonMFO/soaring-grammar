@@ -17,20 +17,17 @@ export abstract class AbstractModuleExplorer<
   abstract isTarget(type: Type): boolean;
 
   onModuleInit(): void {
-    this.registerWrapperDumpServices();
+    this.explorer();
   }
 
-  private registerWrapperDumpServices(): void {
+  private explorer(): void {
     this.discoveryService
       .getProviders()
       .filter((instanceWrapper) =>
         this.isTarget(this.getInstanceMetatype(instanceWrapper)),
       )
       .forEach((instanceWrapper) => {
-        const dumpType = this.getType(
-          this.getInstanceMetatype(instanceWrapper),
-        );
-        this.serviceMap.set(dumpType, instanceWrapper);
+        this.registerService(instanceWrapper);
       });
   }
 
@@ -38,5 +35,10 @@ export abstract class AbstractModuleExplorer<
     return !instanceWrapper.metatype || instanceWrapper.inject
       ? instanceWrapper.instance?.constructor
       : instanceWrapper.metatype;
+  }
+
+  private registerService(instanceWrapper: InstanceWrapper): void {
+    const dumpType = this.getType(this.getInstanceMetatype(instanceWrapper));
+    this.serviceMap.set(dumpType, instanceWrapper);
   }
 }

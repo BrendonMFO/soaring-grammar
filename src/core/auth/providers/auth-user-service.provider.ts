@@ -4,7 +4,7 @@ import { AuthUserService } from '../interfaces/auth-user-service.interface';
 
 export const authUserService = (
   serviceClass: symbol | Type<AuthUserService>,
-): ExistingProvider => ({
+): ExistingProvider<symbol | Type<AuthUserService>> => ({
   provide: AUTH_USER_SERVICE,
   useExisting: serviceClass,
 });

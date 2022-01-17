@@ -2,7 +2,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserModule } from '../user/user.module';
 import { PassportModule } from '@nestjs/passport';
 import { AuthService } from './services/auth.service';
-import { DynamicModule, Module } from '@nestjs/common';
+import { DynamicModule, Module, Type } from '@nestjs/common';
 import { AuthController } from './controllers/auth.controller';
 import { AuthJwtStrategy } from './strategies/auth-jwt.strategy';
 import { AuthGoogleStrategy } from './strategies/auth-google.strategy';
@@ -41,12 +41,18 @@ import { AuthModuleAsyncOptions } from './interfaces/auth-module-async-options.i
   ],
 })
 export class AuthModule {
-  static forRootAsync(optionsAsync: AuthModuleAsyncOptions): DynamicModule {
+  static forRootAsync(
+    userDataLayerModule: Type,
+    optionsAsync: AuthModuleAsyncOptions,
+  ): DynamicModule {
     return {
       module: AuthModule,
-      imports: [UserModule],
-      controllers: [AuthController],
+      imports: [
+        userDataLayerModule,
+        UserModule.forDataLayer(userDataLayerModule),
+      ],
       providers: [authModuleOptionsProvider(optionsAsync)],
+      controllers: [AuthController],
     };
   }
 }

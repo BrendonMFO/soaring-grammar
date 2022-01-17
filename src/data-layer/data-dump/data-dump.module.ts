@@ -8,7 +8,7 @@ import { DataDumpExplorer } from './helpers/data-dump.explorer';
 import { DataDumpTextService } from './services/data-dump-text.service';
 import { DataDumpServiceInjector } from './helpers/data-dump-service.injector';
 import { DataDumpTextAnkiProcessor } from './processors/data-dump-text-anki.processor';
-import { requestedServiceProvider } from 'src/common/providers/requested-service.provider';
+import { requestedServiceProvider } from '@common/providers/requested-service.provider';
 import { DataDumpTextProcessorMetadataAccessor } from './helpers/data-dump-metadata.accessor';
 import { dataDumpTextProcessorMapProvider } from './providers/data-dump-text-processor-map.provider';
 

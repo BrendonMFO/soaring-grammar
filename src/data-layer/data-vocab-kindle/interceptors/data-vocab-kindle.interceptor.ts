@@ -10,7 +10,7 @@ import { getConnection } from 'typeorm';
 import { catchError, Observable, tap } from 'rxjs';
 
 @Injectable()
-export class VocabDbInterceptor implements NestInterceptor {
+export class DataVocabKindleInterceptor implements NestInterceptor {
   intercept(
     context: ExecutionContext,
     next: CallHandler<unknown>,

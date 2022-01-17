@@ -2,7 +2,7 @@ import {
   DUMP_DATA_SERVICE,
   DUMP_REQUEST_QUERY_PROP,
 } from './constants/dump.constants';
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module, Type } from '@nestjs/common';
 import { DiscoveryModule } from '@nestjs/core';
 import { DumpService } from './services/dump.service';
 import { DumpExplorer } from './helpers/dump.explorer';
@@ -27,4 +27,11 @@ import { requestedServiceProvider } from 'src/common/providers/requested-service
   ],
   exports: [DumpService],
 })
-export class DumpModule {}
+export class DumpModule {
+  static forDataLayer(dataLayerModule: Type): DynamicModule {
+    return {
+      module: DumpModule,
+      imports: [dataLayerModule],
+    };
+  }
+}

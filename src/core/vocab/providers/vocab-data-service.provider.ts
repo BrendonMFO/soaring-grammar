@@ -4,7 +4,7 @@ import { VocabDataService } from '../interfaces/vocab-data-service.interface';
 
 export const vocabDataServiceProvider = (
   classType: Type<VocabDataService>,
-): ExistingProvider => ({
+): ExistingProvider<VocabDataService> => ({
   provide: VOCAB_DATA_SERVICE,
   useExisting: classType,
 });

@@ -4,7 +4,7 @@ import { TranslationDataService } from '../interfaces/translation-data-service.i
 
 export const translationDataServiceProvider = (
   classType: Type<TranslationDataService>,
-): ExistingProvider => ({
+): ExistingProvider<TranslationDataService> => ({
   provide: TRANSLATION_DATA_SERVICE,
   useExisting: classType,
 });

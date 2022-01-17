@@ -1,18 +1,14 @@
-import {
-  Pagination,
-  IPaginationMeta,
-  IPaginationOptions,
-} from 'nestjs-typeorm-paginate';
 import { Injectable } from '@nestjs/common';
-import { PhraseTranslateDto } from '../dtos/phrase-translate.dto';
 import { SpeechService } from '@core/speech/services/speech.service';
 import { GrammarService } from '@core/grammar/services/grammar.service';
+import { Pagination, IPaginationOptions } from 'nestjs-typeorm-paginate';
 import { GrammarWord } from '@core/grammar/interfaces/grammar-word.interface';
+import { GrammarPhraseTranslateDto } from '../dtos/grammar-phrase-translate.dto';
 import { GrammarPhrase } from '@core/grammar/interfaces/grammar-phrase.interface';
 import { TranslationService } from '@core/translation/services/translation.service';
 
 @Injectable()
-export class PhraseService {
+export class GrammarPhraseService {
   constructor(
     private readonly speechService: SpeechService,
     private readonly grammarService: GrammarService,
@@ -22,7 +18,7 @@ export class PhraseService {
   paginate(
     userId: number,
     options: IPaginationOptions,
-  ): Promise<Pagination<GrammarWord, IPaginationMeta>> {
+  ): Promise<Pagination<GrammarWord>> {
     return this.grammarService.paginate(userId, options);
   }
 
@@ -40,7 +36,7 @@ export class PhraseService {
 
   async translate(
     phraseId: string,
-    phraseTransleDto: PhraseTranslateDto,
+    phraseTranslateDto: GrammarPhraseTranslateDto,
   ): Promise<GrammarPhrase> {
     const grammarPhrase = await this.grammarService.getGrammarPhraseById(
       phraseId,
@@ -48,7 +44,7 @@ export class PhraseService {
 
     const translation = await this.translationService.translateGrammarPhrase(
       grammarPhrase.phrase,
-      phraseTransleDto,
+      phraseTranslateDto,
     );
 
     grammarPhrase.translatedPhrase = translation.translatedResults[0];

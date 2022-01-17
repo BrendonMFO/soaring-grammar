@@ -15,7 +15,7 @@ import { AuthUser } from '@core/auth/decorators/auth-user.decorator';
 import { GrammarWord } from '@core/grammar/interfaces/grammar-word.interface';
 import { GrammarDatabaseService } from '../services/grammar-database.service';
 import { AuthGuardType } from '@core/auth/constants/auth-guard-type.constants';
-import { VocabDbInterceptor } from '@core/vocab/interceptors/vocab-db.interceptor';
+import { DataVocabKindleInterceptor } from '@data-layer/data-vocab-kindle/interceptors/data-vocab-kindle.interceptor';
 
 @UseGuards(AuthGuard(AuthGuardType.JWT))
 @Controller({
@@ -27,7 +27,7 @@ export class GrammarDatabaseController {
   private readonly grammarDatabaseService: GrammarDatabaseService;
 
   @Post('upload')
-  @UseInterceptors(VocabDbInterceptor)
+  @UseInterceptors(DataVocabKindleInterceptor)
   phraseDatabase(@AuthUser() user: User): Promise<GrammarWord[]> {
     return this.grammarDatabaseService.uploadGrammarDatabase(user.id);
   }

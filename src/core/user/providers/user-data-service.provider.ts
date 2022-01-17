@@ -4,7 +4,7 @@ import { UserDataService } from '../interfaces/user-data-service.interface';
 
 export const userDataServiceProvider = (
   classType: Type<UserDataService>,
-): ExistingProvider => ({
+): ExistingProvider<UserDataService> => ({
   provide: USER_DATA_SERVICE,
   useExisting: classType,
 });

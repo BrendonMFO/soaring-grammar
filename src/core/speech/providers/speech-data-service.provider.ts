@@ -4,7 +4,7 @@ import { SpeechDataService } from '../interfaces/speech-data-service.interface';
 
 export const speechDataServiceProvider = (
   classType: Type<SpeechDataService>,
-): ExistingProvider => ({
+): ExistingProvider<SpeechDataService> => ({
   provide: SPEECH_DATA_SERVICE,
   useExisting: classType,
 });

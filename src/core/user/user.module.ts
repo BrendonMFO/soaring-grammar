@@ -1,4 +1,11 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module, Type } from '@nestjs/common';
 
 @Module({})
-export class UserModule {}
+export class UserModule {
+  static forDataLayer(dataLayerModule: Type): DynamicModule {
+    return {
+      module: UserModule,
+      imports: [dataLayerModule],
+    };
+  }
+}

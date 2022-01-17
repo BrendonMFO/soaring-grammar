@@ -4,6 +4,7 @@ import { GrammarPhrase } from '../interfaces/grammar-phrase.interface';
 import { IPaginationOptions, Pagination } from 'nestjs-typeorm-paginate';
 import { GRAMMAR_DATA_SERVICE } from '../constants/grammar-keys.constants';
 import { GrammarDataService } from '../interfaces/grammar-data-service.interface';
+
 @Injectable()
 export class GrammarService {
   @Inject(GRAMMAR_DATA_SERVICE)

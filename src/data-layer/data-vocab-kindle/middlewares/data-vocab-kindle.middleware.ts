@@ -1,12 +1,12 @@
 import { Multer } from 'multer';
 import { NextFunction, Request, Response } from 'express';
-import { MULTER } from '../constants/vocab-keys.constants';
-import { VOCAB_FIELD_NAME } from '../constants/vocab.constants';
-import { Inject, Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, NestMiddleware, Inject } from '@nestjs/common';
+import { VOCAB_FIELD_NAME } from '@core/vocab/constants/vocab.constants';
+import { VOCAB_KINDLE_MULTER } from '../constants/vocab-kindle-keys.constants';
 
 @Injectable()
-export class VocabMiddleware implements NestMiddleware {
-  @Inject(MULTER)
+export class DataVocabKindleMiddleware implements NestMiddleware {
+  @Inject(VOCAB_KINDLE_MULTER)
   private readonly multer: Multer;
 
   use(req: Request, res: Response, next: NextFunction): void {

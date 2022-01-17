@@ -1,10 +1,15 @@
-import { Module } from '@nestjs/common';
 import { VocabService } from './services/vocab.service';
-import { MULTER } from './constants/vocab-keys.constants';
-import { vocabMulterProvider } from './providers/vocab-multer.provider';
+import { DynamicModule, Module, Type } from '@nestjs/common';
 
 @Module({
-  providers: [VocabService, vocabMulterProvider()],
-  exports: [VocabService, MULTER],
+  providers: [VocabService],
+  exports: [VocabService],
 })
-export class VocabModule {}
+export class VocabModule {
+  static forDataLayer(dataLayerModule: Type): DynamicModule {
+    return {
+      module: VocabModule,
+      imports: [dataLayerModule],
+    };
+  }
+}
